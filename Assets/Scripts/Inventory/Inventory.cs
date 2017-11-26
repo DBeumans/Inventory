@@ -5,10 +5,6 @@ using UnityEngine;
 public class Inventory : MonoBehaviour {
 
     private Dictionary<ItemType, List<Item>> inventory = new Dictionary<ItemType, List<Item>>();
-    /*
-     Output: "ItemType" , <items>
-     Example: "Food", <hambruger, frietjes, honing>
-     */
 
     private void Start()
     {
