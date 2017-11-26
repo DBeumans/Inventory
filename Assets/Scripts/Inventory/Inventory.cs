@@ -85,7 +85,7 @@ public class Inventory : MonoBehaviour {
     private void deleteItem(Item item)
     {
         // loop through the list.
-        for (int i = 0; i < inventory[item.Type].Count; i++)
+        for (int i = 0; i < inventory[item.Type][item.ID].Count; i++)
         {
             //set the current " i " value to a item variable.
             Item currentItem = inventory[item.Type][item.ID][i];
@@ -97,6 +97,7 @@ public class Inventory : MonoBehaviour {
             
             //remove the item from the inventory.
             inventory[item.Type][item.ID].Remove(item);
+            inventory[item.Type][item.ID].RemoveAt(i);
 
             //if its the last item from the inventory, remove the corresponding list init.
             if (inventory[item.Type][item.ID].Count <= 0)
