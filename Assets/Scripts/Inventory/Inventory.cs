@@ -43,10 +43,7 @@ public class Inventory : MonoBehaviour {
              Item apple = new Item(0, ItemType.food, "Apple" + i);
              it = apple;
              addItem(apple);
-         }
-        Debug.Log("FoodType: " +inventory[ItemType.food].Count);
-        Debug.Log(inventory[ItemType.food][0].Count);
- 
+         } 
      }
 
     /// <summary>
