@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour {
      * ----"1" //id
      * ----------Cookie, Cookie //items
      * 
-     * It stores duplicate items in an list.
+     * It stores items with same id in an list.
      * */
 
     private void Awake()
