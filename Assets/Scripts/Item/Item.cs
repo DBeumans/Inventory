@@ -3,12 +3,11 @@ using System.Collections;
 
 public enum ItemType
 {
-    ZERO,
     weapons,
     food
 }
 
-public class Item {
+public class Item : MonoBehaviour{
 
     public Item(int itemId, ItemType itemType, string itemName)
     {
@@ -20,8 +19,6 @@ public class Item {
     public Item()
     {
         this.id = -1;
-        this.type = ItemType.ZERO;
-        this.name = "Null_Item";
     }
 
     private int id;

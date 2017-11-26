@@ -8,19 +8,6 @@ public class Inventory : MonoBehaviour {
     /// The inventory, which is a dictionary so you can have items separated by their types.
     /// </summary>
     private Dictionary<ItemType, Dictionary<int, List<Item>>> inventory = new Dictionary<ItemType, Dictionary<int, List<Item>>>();
-    /*
-     * <<REMINDER>>
-     * Inventory output :
-     * --ItemType--ItemID--List with items
-     * example:
-     * Food // category
-     * ----"0" //id
-     * ----------Apple, Apple //items
-     * ----"1" //id
-     * ----------Cookie, Cookie //items
-     * 
-     * It stores items with same id in an list.
-     * */
 
     private void Awake()
     {
@@ -34,17 +21,6 @@ public class Inventory : MonoBehaviour {
             AddItemTypeToInventory(itemTypes[i]);
         }
     }
-
-    private void Start()
-     {
-         Item it = new Item();
-         for (int i = 0; i< 5; i++)
-         {
-             Item apple = new Item(0, ItemType.food, "Apple" + i);
-             it = apple;
-             addItem(apple);
-         } 
-     }
 
     /// <summary>
     /// Add a item type to the inventory with string.
@@ -137,7 +113,7 @@ public class Inventory : MonoBehaviour {
     /// <returns></returns>
     private bool containsItem(Item item)
     {
-        // loop through the list.
+        // loop through the inventory list.
         for (int i = 0; i < inventory[item.Type].Count; i++)
         {
             //set the current " i " value to a item variable.
