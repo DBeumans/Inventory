@@ -15,10 +15,7 @@ public class Inventory : MonoBehaviour {
             it = apple;
             addItem(apple);
         }
-
-        Debug.Log(inventory[ItemType.food].Count);
         deleteItem(it);
-        Debug.Log(inventory[ItemType.food].Count);
 
     }
 
@@ -54,13 +51,27 @@ public class Inventory : MonoBehaviour {
                 return;
 
             inventory[item.Type].Remove(item);
-            Debug.Log("Deleted: " + "ID: " + item.ID + "Name: " + item.Name);
         }
     }
 
     private bool containsItemType(ItemType type)
     {
         return inventory.ContainsKey(type);
+    }
+
+    private bool containsItem(Item item)
+    {
+        // loop through the list.
+        for (int i = 0; i < inventory[item.Type].Count; i++)
+        {
+            Item currentItem = inventory[item.Type][i];
+            
+            // check if the item is in the list.
+            if (item.Name == currentItem.Name && item.ID == currentItem.ID)
+                return true;    
+        }
+        // Item is not in the inventory.
+        return false;
     }
 
 
