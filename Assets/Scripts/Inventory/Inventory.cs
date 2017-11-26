@@ -5,9 +5,22 @@ using UnityEngine;
 public class Inventory : MonoBehaviour {
 
     /// <summary>
-    /// The inventory, which is a dictionary so you can have items divided by their types.
+    /// The inventory, which is a dictionary so you can have items separated by their types.
     /// </summary>
-    private Dictionary<ItemType, List<Item>> inventory = new Dictionary<ItemType, List<Item>>();
+    private Dictionary<ItemType, Dictionary<int, List<Item>>> inventory = new Dictionary<ItemType, Dictionary<int, List<Item>>>();
+    /*
+     * <<REMINDER>>
+     * Inventory output :
+     * --ItemType--ItemID--List with items
+     * example:
+     * Food // category
+     * ----"0" //id
+     * ----------Apple, Apple //items
+     * ----"1" //id
+     * ----------Cookie, Cookie //items
+     * 
+     * It stores duplicate items in an list.
+     * */
 
     private void Awake()
     {
@@ -21,6 +34,20 @@ public class Inventory : MonoBehaviour {
             AddItemTypeToInventory(itemTypes[i]);
         }
     }
+
+    private void Start()
+     {
+         Item it = new Item();
+         for (int i = 0; i< 5; i++)
+         {
+             Item apple = new Item(0, ItemType.food, "Apple" + i);
+             it = apple;
+             addItem(apple);
+         }
+        Debug.Log("FoodType: " +inventory[ItemType.food].Count);
+        Debug.Log(inventory[ItemType.food][0].Count);
+ 
+     }
 
     /// <summary>
     /// Add a item type to the inventory with string.
@@ -37,7 +64,7 @@ public class Inventory : MonoBehaviour {
             return;
 
         // add the type to the inventory.
-        inventory.Add(itemType, new List<Item>());
+        inventory.Add(itemType, new Dictionary<int, List<Item>>());
     }
 
     /// <summary>
@@ -45,9 +72,13 @@ public class Inventory : MonoBehaviour {
     /// </summary>
     /// <param name="item"></param>
     private void addItem(Item item)
-    {
+    {        
+        //if its the first item from the itemtype list, add a new list init.
+        if(!containsItemList(item.Type, item.ID))
+            inventory[item.Type].Add(item.ID, new List<Item>());
+
         // add the item to the inventory.
-        inventory[item.Type].Add(item);
+        inventory[item.Type][item.ID].Add(item);
     }
 
     /// <summary>
@@ -60,14 +91,21 @@ public class Inventory : MonoBehaviour {
         for (int i = 0; i < inventory[item.Type].Count; i++)
         {
             //set the current " i " value to a item variable.
-            Item currentItem = inventory[item.Type][i];
+            Item currentItem = inventory[item.Type][item.ID][i];
 
             // check if the item ID and NAME are the same, if not stop.
             if (currentItem.ID != item.ID && currentItem.Name != item.Name)
                 return;
 
+            
             //remove the item from the inventory.
-            inventory[item.Type].Remove(item);
+            inventory[item.Type][item.ID].Remove(item);
+
+            //if its the last item from the inventory, remove the corresponding list init.
+            if (inventory[item.Type][item.ID].Count <= 0)
+            {
+                inventory[item.Type].Remove(item.ID);
+            }
         }
     }
 
@@ -83,6 +121,18 @@ public class Inventory : MonoBehaviour {
     }
 
     /// <summary>
+    /// Checks if the item category contains a list with the given item name.
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    private bool containsItemList(ItemType type, int id)
+    {
+        //checks if the inventory [type] contains the items list.
+        return inventory[type].ContainsKey(id);
+    }
+
+    /// <summary>
     /// Checks if the inventory contains the item.
     /// </summary>
     /// <param name="item"></param>
@@ -93,7 +143,7 @@ public class Inventory : MonoBehaviour {
         for (int i = 0; i < inventory[item.Type].Count; i++)
         {
             //set the current " i " value to a item variable.
-            Item currentItem = inventory[item.Type][i];
+            Item currentItem = inventory[item.Type][item.ID][i];
             
             // check if the item is in the list.
             if (item.Name == currentItem.Name && item.ID == currentItem.ID)
