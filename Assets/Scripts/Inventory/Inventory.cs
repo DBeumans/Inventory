@@ -105,7 +105,7 @@ public class Inventory : MonoBehaviour {
         //checks if the inventory [type] contains the items list.
         return inventory[type].ContainsKey(id);
     }
-
+    
     /// <summary>
     /// Checks if the inventory contains the item.
     /// </summary>
