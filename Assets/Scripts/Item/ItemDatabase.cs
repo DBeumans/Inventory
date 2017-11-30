@@ -20,7 +20,7 @@ public class ItemDatabase : MonoBehaviour {
     /// <summary>
     /// Path to the folder where the item prefabs are located.
     /// </summary>
-    private string itemFolderPath = "/Item/Prefabs/";
+    private string itemFolderPath = "Item/Prefabs/";
 
     private void Awake()
     {

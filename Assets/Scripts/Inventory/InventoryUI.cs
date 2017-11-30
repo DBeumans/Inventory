@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public class InventoryUI : MonoBehaviour {
 
-    private string buttonTag = "InventoryButtonSlot";
+    private string buttonParentTag = "InventoryButtonSlotPanel";
 
     [SerializeField]
     private List<GameObject> inventoryButtons = new List<GameObject>();
 
     private Inventory inventory;
 
-    private void Start()
+    private void Awake()
     {
         inventory = GetComponent<Inventory>();
         getInventoryUIButtons();
@@ -19,13 +20,12 @@ public class InventoryUI : MonoBehaviour {
 
     private void getInventoryUIButtons()
     {
-        GameObject[] btns = GameObject.FindGameObjectsWithTag(buttonTag);
-        for (int i = 0; i < btns.Length ; i++)
-        {
-            inventoryButtons.Add(btns[i]);
+        GameObject parentObject = GameObject.FindGameObjectWithTag(buttonParentTag);
 
+        foreach (Transform transform in parentObject.transform)
+        {
+            inventoryButtons.Add(transform.gameObject);
         }
-        inventoryButtons.Reverse();
     }
     
     public void addItem(Item item)
@@ -33,11 +33,17 @@ public class InventoryUI : MonoBehaviour {
         for (int i = 0; i < inventoryButtons.Count; i++)
         {
             GameObject currentButton = inventoryButtons[i];
-            GameObject currentButtonChild = inventoryButtons[i].GetComponent<InventoryButton>().Child;
-            InventoryButton inventoryButton = currentButtonChild.GetComponent<InventoryButton>();
+            GameObject childButton = inventoryButtons[i].transform.GetChild(0).gameObject;
+            InventoryButton inventoryButton = currentButton.GetComponent<InventoryButton>();
+
+            if (inventoryButton.HasItem)
+                continue;
+
             currentButton.name = item.Name;
-            currentButtonChild.name = item.Name;
-            inventoryButton.Sprite = item.Sprite;
+            childButton.name = item.Name;
+            inventoryButton.HasItem = true;
+
+            childButton.GetComponent<Image>().sprite = item.Sprite;
             return;
         }
     }

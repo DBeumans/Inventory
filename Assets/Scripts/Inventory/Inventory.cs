@@ -13,9 +13,9 @@ public class Inventory : MonoBehaviour {
 
     private void Start()
     {
-        Item item = new Item(0, ItemType.food, "TestItem");
+        Item item = new Item(0, ItemType.food, "item");
         ui = GetComponent<InventoryUI>();
-        Debug.Log(item);
+        ui.addItem(item);
         ui.addItem(item);
     }
 

@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class InventoryButton : MonoBehaviour {
 
-    private Button btn;
-
-    private Image image;
-
-    private Sprite sprite;
-    public Sprite Sprite
+    private bool hasItem;
+    public bool HasItem
     {
-        get { return sprite; }
-        set { sprite = value; }
+        get { return hasItem; }
+        set { hasItem = value; }
     }
+
+    private Button btn;
 
     private GameObject child;
     public GameObject Child
@@ -25,9 +23,6 @@ public class InventoryButton : MonoBehaviour {
     {
         btn = GetComponent<Button>();
         btn.onClick.AddListener(delegate () { onClick(); });
-
-        image = GetComponent<Image>();
-        image.sprite = sprite;
 
         child = this.gameObject.transform.GetChild(0).gameObject;
     }

@@ -14,7 +14,7 @@ public class Item {
         this.id = itemId;
         this.type = itemType;
         this.name = itemName;
-        this.sprite = Resources.Load<Sprite>("/Item/Prefabs/Images/" + this.name);
+        this.sprite = Resources.Load<Sprite>("Item/Prefabs/Images/" + this.name);
     }
 
     public Item()
