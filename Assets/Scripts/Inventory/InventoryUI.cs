@@ -6,6 +6,7 @@ public class InventoryUI : MonoBehaviour {
 
     private string buttonTag = "InventoryButtonSlot";
 
+    [SerializeField]
     private List<GameObject> inventoryButtons = new List<GameObject>();
 
     private Inventory inventory;
@@ -19,15 +20,26 @@ public class InventoryUI : MonoBehaviour {
     private void getInventoryUIButtons()
     {
         GameObject[] btns = GameObject.FindGameObjectsWithTag(buttonTag);
-        for (int i = 0; i < btns.Length; i++)
+        for (int i = 0; i < btns.Length ; i++)
         {
             inventoryButtons.Add(btns[i]);
+
         }
+        inventoryButtons.Reverse();
     }
     
     public void addItem(Item item)
     {
-
+        for (int i = 0; i < inventoryButtons.Count; i++)
+        {
+            GameObject currentButton = inventoryButtons[i];
+            GameObject currentButtonChild = inventoryButtons[i].GetComponent<InventoryButton>().Child;
+            InventoryButton inventoryButton = currentButtonChild.GetComponent<InventoryButton>();
+            currentButton.name = item.Name;
+            currentButtonChild.name = item.Name;
+            inventoryButton.Sprite = item.Sprite;
+            return;
+        }
     }
 
     private void updateInventoryUI()

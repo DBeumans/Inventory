@@ -7,13 +7,14 @@ public enum ItemType
     food
 }
 
-public class Item : MonoBehaviour{
+public class Item {
 
     public Item(int itemId, ItemType itemType, string itemName)
     {
         this.id = itemId;
         this.type = itemType;
         this.name = itemName;
+        this.sprite = Resources.Load<Sprite>("/Item/Prefabs/Images/" + this.name);
     }
 
     public Item()
@@ -37,5 +38,11 @@ public class Item : MonoBehaviour{
     public string Name
     {
         get { return name; }
+    }
+
+    private Sprite sprite;
+    public Sprite Sprite
+    {
+        get { return sprite; }
     }
 }

@@ -9,6 +9,16 @@ public class Inventory : MonoBehaviour {
     /// </summary>
     private Dictionary<ItemType, Dictionary<int, List<Item>>> inventory = new Dictionary<ItemType, Dictionary<int, List<Item>>>();
 
+    private InventoryUI ui;
+
+    private void Start()
+    {
+        Item item = new Item(0, ItemType.food, "TestItem");
+        ui = GetComponent<InventoryUI>();
+        Debug.Log(item);
+        ui.addItem(item);
+    }
+
     private void Awake()
     {
         // store all the enum types in a string array.
@@ -69,8 +79,7 @@ public class Inventory : MonoBehaviour {
             // check if the item ID and NAME are the same, if not stop.
             if (currentItem.ID != item.ID && currentItem.Name != item.Name)
                 return;
-
-            
+ 
             //remove the item from the inventory.
             inventory[item.Type][item.ID].Remove(item);
             inventory[item.Type][item.ID].RemoveAt(i);
