@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour {
 
     private void Start()
     {
-        Item item = new Item(0, ItemType.food, "item");
+        Item item = new Item(0, ItemType.food, "Apple");
         ui = GetComponent<InventoryUI>();
         ui.addItem(item);
         ui.addItem(item);

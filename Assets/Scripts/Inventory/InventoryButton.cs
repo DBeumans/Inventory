@@ -29,6 +29,6 @@ public class InventoryButton : MonoBehaviour {
 
     private void onClick()
     {
-
+        Debug.Log(this.hasItem + "\n" + child.name);
     }
 }
