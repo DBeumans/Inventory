@@ -15,6 +15,12 @@ public class InputBehaviour : MonoBehaviour {
         get { return mouseRight; }
     }
 
+    private static Vector2 mousePosition;
+    public static Vector2 MousePosition
+    {
+        get { return mousePosition; }
+    }
+
     private KeyCode mouse_left;
     private KeyCode mouse_right;
 
@@ -23,9 +29,9 @@ public class InputBehaviour : MonoBehaviour {
         mouse_left = KeyCode.Mouse0;
         mouse_right = KeyCode.Mouse1;
 
-
         mouseLeft = Input.GetKeyDown(mouse_left);
         mouseRight = Input.GetKeyDown(mouse_right);
 
+        mousePosition = Input.mousePosition;
     }
 }

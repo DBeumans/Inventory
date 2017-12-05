@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InventoryButtonSlot
   - InventoryButtonSlotPanel
+  - ToolTip
   layers:
   - Default
   - TransparentFX

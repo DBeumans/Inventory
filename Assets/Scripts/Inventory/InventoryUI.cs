@@ -14,7 +14,7 @@ public class InventoryUI : MonoBehaviour {
 
     private void Awake()
     {
-        inventory = GetComponent<Inventory>();
+       //inventory = GetComponent<Inventory>();
         getInventoryUIButtons();
     }
 
@@ -42,6 +42,7 @@ public class InventoryUI : MonoBehaviour {
             currentButton.name = item.Name;
             childButton.name = item.Name;
             inventoryButton.HasItem = true;
+            inventoryButton.Item = item;
 
             childButton.GetComponent<Image>().sprite = item.Sprite;
             return;
